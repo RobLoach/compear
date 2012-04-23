@@ -2,8 +2,7 @@
     "name": "composer/compear",
     "description": "pear.getcomposer.org.",
     "require": {
-        "pirum/pirum": "*",
-        "composer/composer": "*"
+        "pirum/pirum": "*"
     },
     "autoload": {
         "psr-0": { "ComPear": "src/" }
