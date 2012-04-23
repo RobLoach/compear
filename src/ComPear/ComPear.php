@@ -5,7 +5,19 @@ namespace ComPear;
 use Composer\Script\Event;
 
 class ComPear {
-    public static function postUpdate(Event $event) {
+    /**
+     * Sets up the Pirum PEAR repository.
+     */
+    public static function setUp(Event $event) {
+        $base = dirname(dirname(__DIR__));
+        $pirum = $base . '/vendor/bin/pirum';
+        system("$pirum build $base/web");
+    }
+
+    /**
+     * Adds a new release to the PEAR repository.
+     */
+    public static function addRelease(Event $event) {
         // Download the latest composer.phar.
         $base = dirname(dirname(__DIR__));
         $destination = $base . '/package/composer.phar';
@@ -14,7 +26,7 @@ class ComPear {
         // Update the package.xml appropriately.
         $version = '1.0.0snapshot' . date('YmdHi');
         $s = simplexml_load_file($base . '/package/package-default.xml');
-        $s->version = $version;
+        $s->version->release = $version;
         file_put_contents($base . '/package/package.xml', $s->asXML());
 
         // Compress the files to a tgz file.
@@ -24,7 +36,6 @@ class ComPear {
         chdir($original);
 
         $pirum = $base . '/vendor/bin/pirum';
-        system("$pirum build $base/web");
         system("$pirum add $base/web $base/package/composer-$version.tgz");
     }
 }

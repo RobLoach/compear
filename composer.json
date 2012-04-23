@@ -8,8 +8,11 @@
         "psr-0": { "ComPear": "src/" }
     },
     "scripts": {
+        "post-install-cmd": [
+            "ComPear\\ComPear::setUp"
+        ],
         "post-update-cmd": [
-            "ComPear\\ComPear::postUpdate"
+            "ComPear\\ComPear::addRelease"
         ]
     }
 }
