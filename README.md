@@ -18,6 +18,6 @@ Check out ComPEAR, and install it using Composer:
 Usage
 -----
 
-Generate the PEAR repository and add a Composer package by running:
+Add a Composer snapshot to the PEAR repository by running:
 
     ./composer.phar update
