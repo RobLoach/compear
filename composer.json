@@ -1,0 +1,16 @@
+{
+    "name": "composer/compear",
+    "description": "pear.getcomposer.org.",
+    "require": {
+        "pirum/pirum": "*",
+        "composer/composer": "*"
+    },
+    "autoload": {
+        "psr-0": { "ComPear": "src/" }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "ComPear\\ComPear::postUpdate"
+        ]
+    }
+}

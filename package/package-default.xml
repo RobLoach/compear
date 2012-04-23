@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0         http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>composer</name>
+ <channel>pear.getcomposer.org</channel>
+ <summary>Composer is a tool for dependency management in PHP. It allows you to declare the dependent libraries your project needs and it will install them in your project for you.</summary>
+ <description>Composer is not a package manager. Yes, it deals with "packages" or libraries, but it manages them on a per-project basis, installing them in a directory (e.g. vendor) inside your project. By default it will never install anything globally. Thus, it is a dependency manager.</description>
+ <lead>
+  <name>Jordi Boggiano</name>
+  <user>Seldaek</user>
+  <email>j.boggiano@seld.be</email>
+  <active>yes</active>
+ </lead>
+ <license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file role="php" name="composer.phar"/>
+  </dir>
+ </contents>
+ <phprelease>
+   <filelist>
+     <install as="composer.phar" name="composer"/>
+     <install as="composer.phar" name="composer.phar"/>
+   </filelist>
+ </phprelease>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.3</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <version>
+  <release>1.0.0</release>
+  <api>1</api>
+ </version>
+ <stability>
+  <release>snapshot</release>
+  <api>stable</api>
+ </stability>
+ <date>2012-04-23</date>
+</package>
