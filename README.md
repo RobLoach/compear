@@ -1,7 +1,7 @@
 ComPEAR
 =======
 
-Attempt at a PEAR repository for Composer.
+A PEAR repository for Composer.
 
 
 Installation
