@@ -1,6 +1,0 @@
-<server>
-    <name>pear.getcomposer.org</name>
-    <summary>Composer's PEAR Channel Server</summary>
-    <alias>composer</alias>
-    <url>http://pear.getcomposer.org</url>
-</server>

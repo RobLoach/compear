@@ -1,7 +1,7 @@
 ComPEAR
 =======
 
-A PEAR repository for Composer.
+Create a PEAR repository from a [Satis](https://github.com/composer/satis) definition.
 
 
 Installation
@@ -9,15 +9,19 @@ Installation
 
 Check out ComPEAR, and install it using Composer:
 
-    git clone git://github.com/RobLoach/compear.git
-    cd compear
-    curl -s http://getcomposer.org/installer | php
-    ./composer.phar install
+    ``` sh
+    $ git clone git://github.com/RobLoach/compear.git
+    $ cd compear
+    $ curl -s http://getcomposer.org/installer | php
+    $ php composer.phar install
+    ```
 
 
 Usage
 -----
 
-Add a Composer snapshot to the PEAR repository by running:
+Build a PEAR repository from a satis definition.
 
-    ./composer.phar update
+    ``` sh
+    $ vendor/bin/compear build <satis.json> <output-dir>
+    ```

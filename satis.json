@@ -1,0 +1,11 @@
+{
+    "name": "Composer",
+    "homepage": "http://pear.getcomposer.org",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "http://github.com/composer/composer"
+        }
+    ],
+    "require-all": true
+}

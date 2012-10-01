@@ -1,0 +1,75 @@
+{
+    "hash": "6b25b03dafb807f0ce071f1a196f9d7f",
+    "packages": [
+        {
+            "package": "composer/composer",
+            "version": "dev-master",
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
+        },
+        {
+            "package": "composer/composer",
+            "version": "dev-master",
+            "source-reference": "ce31449b2d4b5af9f3462c4129414b4dc81daecc",
+            "commit-date": "1348881968"
+        },
+        {
+            "package": "composer/satis",
+            "version": "dev-master",
+            "source-reference": "0fcbbf6be1c8f07cf60eb68ca7511a21b1813c8f",
+            "commit-date": "1346248014"
+        },
+        {
+            "package": "justinrainbow/json-schema",
+            "version": "1.1.0"
+        },
+        {
+            "package": "pirum/pirum",
+            "version": "dev-master",
+            "source-reference": "3998d1b528d4cbbe66c48e4da0837b40b7300d7f",
+            "commit-date": "1334932237"
+        },
+        {
+            "package": "seld/jsonlint",
+            "version": "1.0.0"
+        },
+        {
+            "package": "symfony/console",
+            "version": "2.1.x-dev",
+            "source-reference": "1fbfb98e6b976189947df1b519b029e0d967d3f5",
+            "commit-date": "1348842916"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "2.1.x-dev",
+            "source-reference": "v2.1.2",
+            "commit-date": "1345643321"
+        },
+        {
+            "package": "symfony/process",
+            "version": "2.1.x-dev",
+            "source-reference": "f43a1238556d15486d73e5a5c741636eb8e52cff",
+            "commit-date": "1348580933"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "alias-pretty-version": "1.10.x-dev",
+            "alias-version": "1.10.9999999.9999999-dev"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "120cde3fa54c31047edf1cd003752ca119dec9a8",
+            "commit-date": "1348936415"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}

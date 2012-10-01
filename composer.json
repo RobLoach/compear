@@ -1,18 +1,18 @@
 {
-    "name": "composer/compear",
-    "description": "pear.getcomposer.org.",
+    "name": "robloach/compear",
+    "description": "Creates a PEAR repository from a Satis definition.",
     "require": {
-        "pirum/pirum": "*"
+        "composer/composer": "*",
+        "composer/satis": "*",
+        "pirum/pirum": "*",
+        "symfony/console": "2.1.*",
+        "symfony/process": "2.1.*"
     },
     "autoload": {
-        "psr-0": { "ComPear": "src/" }
+        "psr-0": { "Compear": "src/" }
     },
-    "scripts": {
-        "post-install-cmd": [
-            "ComPear\\ComPear::setUp"
-        ],
-        "post-update-cmd": [
-            "ComPear\\ComPear::addRelease"
-        ]
-    }
+    "bin": [
+        "bin/compear"
+    ],
+    "minimum-stability": "dev"
 }

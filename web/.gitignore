@@ -1,4 +1,0 @@
-# Ignore everything but pirum.xml and .gitignore.
-*
-!pirum.xml
-!.gitignore
