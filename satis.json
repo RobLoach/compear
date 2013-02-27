@@ -4,8 +4,10 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "http://github.com/composer/composer"
+            "url": "http://github.com/composer/composer.git"
         }
     ],
-    "require-all": true
+    "require": {
+        "composer/composer": "*"
+    }
 }

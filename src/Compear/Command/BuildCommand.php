@@ -27,7 +27,8 @@ class BuildCommand extends BaseCommand
 {
     private $file = 'satis.json';
     private $output_dir = 'pear';
-    private $pirum_path = NULL;
+    private $satis_dir = 'satis';
+    private $paths = array();
 
     protected function configure()
     {
@@ -36,15 +37,9 @@ class BuildCommand extends BaseCommand
             ->setDescription('Builds a PEAR repository from the given Satis definition.')
             ->addArgument('file', InputArgument::OPTIONAL, 'The Satis definition to load', 'satis.json')
             ->addArgument('output-dir', InputArgument::OPTIONAL, 'Where the PEAR repository should be built', 'pear')
+            ->addArgument('satis-dir', InputArgument::OPTIONAL, 'Where the temporary Satis repository should be built', 'satis')
             ->addOption('no-html-output', null, InputOption::VALUE_NONE, 'Turn off HTML view')
-            ->setHelp(<<<EOT
-The <info>build</info> command builds a PEAR repository
-from the given Satis definition.
-
-<info>php compear init</info>
-
-EOT
-            )
+            ->setHelp('The <info>build</info> command builds a PEAR repository from the given Satis definition.')
         ;
     }
 
@@ -53,20 +48,27 @@ EOT
         // Build the Satis repository first.
         parent::execute($input, $output);
 
+        // Build the Satis repository.
+        $output->writeln('<info>Building Satis repository.</info>');
+        $this->satis_dir = $input->getArgument('satis-dir');
+        $output->write($this->runBin('satis', 'build', array('satis.json', $this->satis_dir)));
+
         // Get information about the Satis repository.
-        $this->file = $input->getArgument('file');
         $this->output_dir = $input->getArgument('output-dir');
+        $output->writeln('<info>Reading Satis information.</info>');
+        $this->file = $input->getArgument('file');
         $json = new JsonFile($this->file);
         $satis = $json->read();
 
         // Create the Pirum definition file.
+        $output->writeln('<info>Creating Pirum definition file.</info>');
         $this->satisToPirum($satis);
 
         // Build the PEAR repository using Pirum.
-        $pirum_path = $this->getPirumPath();
-        $output->write($this->runPirum('build'));
+        $output->writeln('<info>Building PEAR repository.</info>');
+        $output->write($this->runBin('pirum', 'build', array($this->output_dir)));
 
-        $this->addReleases();
+        $this->addReleases($output);
     }
 
     /**
@@ -98,39 +100,39 @@ EOT
                 $output .= PHP_EOL.'</'.$tag.'>';
             }
         }
-       
+
         return $output;
     }
 
     /**
-     * Retrieves the path to the Pirum executable.
+     * Retrieves the path to an executable.
      */
-    protected function getPirumPath() {
-        // Cache the Pirum path.
-        if (!isset($this->pirum_path)) {
+    protected function getBinPath($bin) {
+        // Cache the path.
+        if (!isset($this->paths[$bin])) {
             // Pirum can exist in the vendor bin, or straight "pirum".
             $base = dirname(dirname(dirname(__DIR__)));
             $options = array(
-              $base . '/vendor/bin/pirum',
-              dirname(dirname($base)) . '/bin/pirum',
-              'pirum',
+              $base . '/vendor/bin/' . $bin,
+              dirname(dirname($base)) . '/bin/' . $bin,
+              $bin,
             );
             foreach ($options as $file) {
                 if (file_exists($file)) {
-                    return $this->pirum_path = $file;
+                    return $this->bin[$bin] = $file;
                 }
             }
-            throw new \RuntimeException('Could not find Pirum.');
+            throw new \RuntimeException('Could not find ' . $bin . '.');
         }
-        return $this->pirum_path;
+        return $this->bin[$bin];
     }
 
     /**
      * Runs the given Pirum command with the provided argument.
      */
-    protected function runPirum($command, $argument = '') {
-        $pirum = $this->getPirumPath();
-        $process = new Process($pirum.' '.$command.' '.$this->output_dir .' '.$argument);
+    protected function runBin($bin, $command, $arguments = array()) {
+        $path = $this->getBinPath($bin);
+        $process = new Process($path . ' ' . $command . ' ' . implode(' ', $arguments));
         $process->run();
         return $process->getOutput();
     }
@@ -141,11 +143,14 @@ EOT
      * @param array $packages
      *     The packages to add to the PEAR repository.
      */
-    protected function addReleases() {
-        /*$file = new JsonFile($this->output_dir.'/packages.json');
-        $repo = new FilesystemRepository($file);
-        foreach ($repo->getPackages() as $package) {
-            echo 'hi';
-        }*/
+    protected function addReleases(OutputInterface $output) {
+        $file = new JsonFile($this->satis_dir.'/packages.json');
+        $data = $file->read();
+        foreach ($data['packages'] as $name => $package) {
+            $output->writeln('Processing package: ' . $name);
+            foreach ($package as $version => $info) {
+                $output->writeln('Processing version: ' . $version);
+            }
+        }
     }
 }

@@ -6,7 +6,8 @@
         "composer/satis": "*",
         "pirum/pirum": "*",
         "symfony/console": "2.1.*",
-        "symfony/process": "2.1.*"
+        "symfony/process": "2.1.*",
+        "c9s/PEARX": "*"
     },
     "autoload": {
         "psr-0": { "Compear": "src/" }
